@@ -1,0 +1,58 @@
+DELETE employee
+
+PUT employee
+{
+  "mappings": {
+    "properties": {
+      "id": { "type": "keyword" },
+      "name": { "type": "text" },
+      "department": { "type": "keyword" },
+      "salary": { "type": "double" },
+      "age": { "type": "integer" }
+    }
+  }
+}
+
+
+
+POST _bulk
+{ "index": { "_index": "employee", "_id": "1" } }
+{ "id": "1", "name": "John Doe", "department": "IT", "salary": 75000, "age": 30 }
+{ "index": { "_index": "employee", "_id": "2" } }
+{ "id": "2", "name": "Jane Smith", "department": "HR", "salary": 65000, "age": 28 }
+{ "index": { "_index": "employee", "_id": "3" } }
+{ "id": "3", "name": "Alice Johnson", "department": "Finance", "salary": 80000, "age": 35 }
+{ "index": { "_index": "employee", "_id": "4" } }
+{ "id": "4", "name": "Bob Brown", "department": "Marketing", "salary": 72000, "age": 32 }
+{ "index": { "_index": "employee", "_id": "5" } }
+{ "id": "5", "name": "Emily Davis", "department": "Sales", "salary": 69000, "age": 27 }
+{ "index": { "_index": "employee", "_id": "6" } }
+{ "id": "6", "name": "Michael Wilson", "department": "IT", "salary": 78000, "age": 31 }
+{ "index": { "_index": "employee", "_id": "7" } }
+{ "id": "7", "name": "Sarah Miller", "department": "HR", "salary": 67000, "age": 29 }
+{ "index": { "_index": "employee", "_id": "8" } }
+{ "id": "8", "name": "David Lee", "department": "Finance", "salary": 82000, "age": 36 }
+{ "index": { "_index": "employee", "_id": "9" } }
+{ "id": "9", "name": "Olivia Martinez", "department": "Marketing", "salary": 74000, "age": 33 }
+{ "index": { "_index": "employee", "_id": "10" } }
+{ "id": "10", "name": "Daniel Taylor", "department": "Sales", "salary": 71000, "age": 26 }
+{ "index": { "_index": "employee", "_id": "11" } }
+{ "id": "11", "name": "Sophia Anderson", "department": "IT", "salary": 76000, "age": 30 }
+{ "index": { "_index": "employee", "_id": "12" } }
+{ "id": "12", "name": "James Thomas", "department": "HR", "salary": 66000, "age": 28 }
+{ "index": { "_index": "employee", "_id": "13" } }
+{ "id": "13", "name": "Ava Garcia", "department": "Finance", "salary": 81000, "age": 35 }
+{ "index": { "_index": "employee", "_id": "14" } }
+{ "id": "14", "name": "Matthew Hernandez", "department": "Marketing", "salary": 73000, "age": 32 }
+{ "index": { "_index": "employee", "_id": "15" } }
+{ "id": "15", "name": "Isabella Martinez", "department": "Sales", "salary": 70000, "age": 27 }
+{ "index": { "_index": "employee", "_id": "16" } }
+{ "id": "16", "name": "Ethan White", "department": "IT", "salary": 79000, "age": 31 }
+{ "index": { "_index": "employee", "_id": "17" } }
+{ "id": "17", "name": "Mia Gonzalez", "department": "HR", "salary": 68000, "age": 29 }
+{ "index": { "_index": "employee", "_id": "18" } }
+{ "id": "18", "name": "Alexander Robinson", "department": "Finance", "salary": 83000, "age": 36 }
+{ "index": { "_index": "employee", "_id": "19" } }
+{ "id": "19", "name": "Charlotte Lopez", "department": "Marketing", "salary": 75000, "age": 33 }
+{ "index": { "_index": "employee", "_id": "20" } }
+{ "id": "20", "name": "Benjamin Clark", "department": "Sales", "salary": 72000, "age": 26 }

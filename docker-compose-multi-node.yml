@@ -1,0 +1,79 @@
+version: "3"
+networks:
+  elastic:
+    driver: bridge
+services:
+  # es1:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
+  #   container_name: elasticsearch
+  #   environment:
+  #     - discovery.type=single-node
+  #     - xpack.security.enabled=false
+  #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #   volumes:
+  #     - esdata:/usr/share/elasticsearch/data
+  #   ports:
+  #     - "9200:9200"
+  #     - "9300:9300"
+  #   networks:
+  #     - elastic
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+    environment:
+      - node.name=es01
+      - cluster.name=my-cluster
+      - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
+      - cluster.initial_master_nodes=es01
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      # - node.roles=master #chỉ định node này là master chỉ làm master quản lý medata data ko chứa dữ liệu
+    networks:
+      - elastic
+  es02:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+    environment:
+      - node.name=es02
+      - cluster.name=my-cluster
+      - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
+      - cluster.initial_master_nodes=es01
+      - discovery.seed_hosts=es01
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      #Lưu trữ dữ liệu, xử lý truy vấn, tham gia bầu chọn nhưng không thể trở thành master.
+      #- node.roles=master,data,voting_only #lưu dữ liệu, voting_only chỉ có thể tham gia bầu master chứ ko thể làm master
+    ports:
+      - 9202:9200
+    networks:
+      - elastic
+  es03:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+    environment:
+      - node.name=es03
+      - cluster.name=my-cluster
+      - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
+      - cluster.initial_master_nodes=es01
+      - discovery.seed_hosts=es01
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    #- node.roles=master,data,voting_only #lưu dữ liệu, voting_only chỉ có thể tham gia bầu master chứ ko thể làm master
+    ports:
+      - 9203:9200
+    networks:
+      - elastic
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.12.0
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=["http://es01:9200","http://es02:9200","http://es03:9200"]
+    ports:
+      - "5601:5601"
+    depends_on:
+      - es01
+      - es02
+      - es03
+    networks:
+      - elastic
+
+volumes:
+  esdata:
+    driver: local
