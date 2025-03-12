@@ -36,5 +36,7 @@ public interface EmployeeService {
 	
 	SearchHits<Employee> findByName(String name);
 	
+	SearchHits<Employee> findByAgeLessThan(Integer age);
+	
 	
 }

@@ -11,6 +11,7 @@ import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.stereotype.Service;
 
 import com.app.model.Employee;
+import com.app.repository.EmployeeCustomRepository;
 import com.app.repository.EmployeeRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class EmployeeServiceImpl implements EmployeeService{
 	
 	private final EmployeeRepository employeeRepository;
+	private final EmployeeCustomRepository employeeCustomRepository;
 
 	@Override
 	public Employee createEmployee(Employee employee) {
@@ -84,6 +86,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public SearchHits<Employee> findByName(String name) {
 		return employeeRepository.findByName(name);
+	}
+
+	@Override
+	public SearchHits<Employee> findByAgeLessThan(Integer age) {
+		return employeeCustomRepository.findByAgeLessThan(age);
 	}
 
 }

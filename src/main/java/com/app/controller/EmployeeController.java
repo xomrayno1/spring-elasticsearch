@@ -98,5 +98,14 @@ public class EmployeeController {
 		return ResponseEntity.ok(employeeService.findByName(name));
 	}
 	
+	/**
+	 * get employy by age less than <br>
+	 * using criteria <br>
+	 * **/
+	@GetMapping("/search_by_age_less_than")
+	public ResponseEntity<Object> searchByAgeLessThan(@RequestParam("age") Integer age) {
+		return ResponseEntity.ok(employeeService.findByAgeLessThan(age));
+	}
+	
 	
 }
